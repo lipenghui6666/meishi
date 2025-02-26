@@ -103,7 +103,7 @@
                     </div>
                     <div class="trending" v-if="searchInput == ''">
                         <div class="header">
-                            <div class="title">teriteri热搜</div>
+                            <div class="title">美食</div>
                         </div>
                         <div class="trendings-double" v-if="screenWidth >= 1450">
                             <div class="trendings-col" style="max-width: calc(50% - 5px);">
@@ -183,7 +183,7 @@
                         <a :href="`/space/${user.uid}`" target="_blank" class="nickname" :class="user.vip !== 0 ? 'vip-name' : ''">
                             <span>{{ user.nickname }}</span>
                         </a>
-                        <div class="vip-level-tag">
+                        <!-- <div class="vip-level-tag">
                             <div class="vip-tag" v-if="user.vip !== 0">
                                 {{ user.vip === 1 ? '月度' : user.vip === 2 ? '季度' : '年度' }}大会员
                             </div>
@@ -208,7 +208,7 @@
                                 <div class="count-num">{{ handleNum(0) }}</div>
                                 <div class="count-text">动态</div>
                             </a>
-                        </div>
+                        </div> -->
                         <div class="single-item middle" @click="openNewPage('/account')">
                             <div class="single-item-left">
                                 <el-icon size="16"><User /></el-icon>
