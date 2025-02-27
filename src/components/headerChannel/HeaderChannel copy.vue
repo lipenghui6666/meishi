@@ -9,7 +9,7 @@
                     </picture>
                     <i class="iconfont icon-fengche" v-else></i>
                 </div>
-                <span class="icon-title">食谱</span>
+                <span class="icon-title">动态</span>
             </div>
             <div class="channel-icons__item">
                 <div class="icon-bg icon-bg__popular">
@@ -21,31 +21,179 @@
         <!-- 右边 -->
         <div class="right-channel-container">
             <!-- 中间频道 -->
+            <div class="channel-items__left" v-if="channels.length != 0">
+                <!-- 番剧 -->
+                <VPopover class="channel-link" placement="top" popStyle="z-index: 2000; cursor: default;">
+                    <template #reference>
+                        <div @click="openNewPage(`/v/${channels[0].mcId}`)">
+                            <span>{{ channels[0].mcName }}</span>
+                        </div>
+                    </template>
+                    <template #content>
+                        <div class="channel-children-container">
+                            <div
+                                class="sub-item"
+                                v-for="subIndex in Math.ceil(channels[0].scList.length / 4)" :key="subIndex"
+                            >
+                                <div @click="openNewPage(`/v/${child.mcId}/${child.scId}`)"
+                                    class="channel-children"
+                                    v-for="(child, chIndex) in channels[0].scList.slice((subIndex - 1) * 4, subIndex * 4)"
+                                    :key="chIndex"
+                                >
+                                    {{ child.scName }}
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </VPopover>
+                <div class="channel-link" @click="openNewPage(`/movie`)">
+                    <span>电影</span>
+                </div>
+                <!-- 国创 -->
+                <VPopover class="channel-link" placement="top" popStyle="z-index: 2000; cursor: default;">
+                    <template #reference>
+                        <div @click="openNewPage(`/v/${channels[1].mcId}`)">
+                            <span>{{ channels[1].mcName }}</span>
+                        </div>
+                    </template>
+                    <template #content>
+                        <div class="channel-children-container">
+                            <div
+                                class="sub-item"
+                                v-for="subIndex in Math.ceil(channels[1].scList.length / 4)" :key="subIndex"
+                            >
+                                <div @click="openNewPage(`/v/${child.mcId}/${child.scId}`)"
+                                    class="channel-children"
+                                    v-for="(child, chIndex) in channels[1].scList.slice((subIndex - 1) * 4, subIndex * 4)"
+                                    :key="chIndex"
+                                >
+                                    {{ child.scName }}
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </VPopover>
+                <div class="channel-link" @click="openNewPage(`/tv`)">
+                    <span>电视剧</span>
+                </div>
+                <div class="channel-link" @click="openNewPage(`/variety`)">
+                    <span>综艺</span>
+                </div>
+                <div class="channel-link" @click="openNewPage(`/documentary`)">
+                    <span>记录片</span>
+                </div>
+                <!-- 将剩下的遍历出来 -->
+                <VPopover class="channel-link"
+                    v-for="(item, index) in channels.slice(2)"
+                    :key="index"
+                    :placement="index % 2 == 0 ? 'top' : 'bottom'"
+                    popStyle="z-index: 2000; cursor: default;"
+                >
+                    <template #reference>
+                        <div @click="openNewPage(`/v/${item.mcId}`)">
+                            <span>{{ item.mcName }}</span>
+                        </div>
+                    </template>
+                    <template #content>
+                        <div class="channel-children-container">
+                            <div
+                                class="sub-item"
+                                v-for="subIndex in Math.ceil(item.scList.length / 4)" :key="subIndex"
+                            >
+                                <div @click="openNewPage(`/v/${child.mcId}/${child.scId}`)"
+                                    class="channel-children"
+                                    v-for="(child, chIndex) in item.scList.slice((subIndex - 1) * 4, subIndex * 4)"
+                                    :key="chIndex"
+                                >
+                                    {{ child.scName }}
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </VPopover>
+                <div class="channel-link" @click="openNewPage(`/v/life/daily`)">
+                    <span>VLOG</span>
+                </div>
+                <div class="channel-link" @click="openNewPage(`/v/life/funny`)">
+                    <span>搞笑</span>
+                </div>
+                <div class="channel-link" @click="openNewPage(`/v/game/stand_alone`)">
+                    <span>单机游戏</span>
+                </div>
+                <div class="channel-link" @click="openNewPage(`/love`)">
+                    <span>公益</span>
+                </div>
+                <div class="channel-link" @click="openNewPage(`/mooc`)">
+                    <span>公开课</span>
+                </div>
+                <VPopover
+                    placement="bottom"
+                    popStyle="z-index: 2000;"
+                    @mouseenter="isOpen = true;"
+                    @mouseleave="isOpen = false;"
+                >
+                    <template #reference>
+                        <div id="channel-entry-more" class="channel-entry-more__link">
+                            <span style="margin-left: -8px;">更多</span>
+                            <i class="iconfont icon-xiajiantou" :class="isOpen ? 'arrow-down' : ''"></i>
+                        </div>
+                    </template>
+                    <template #content>
+                        <div class="more-channel-popover__wrap">
+                            <div class="more-channel"></div>
+                            <div class="more-channel"></div>
+                            <div class="more-channel"></div>
+                            <div class="more-channel"></div>
+                            <div class="more-channel"></div>
+                            <div class="more-channel"></div>
+                            <!-- 前面的是占位符，反正也展示不出来的 -->
+                            <div class="more-channel" v-for="(item, index) in channels.slice(2)" :key="index" @click="openNewPage(`/v/${item.mcId}`)">
+                                {{ item.mcName }}
+                            </div>
+                            <div class="more-channel" @click="openNewPage(`/v/life/daily`)">
+                                <span>VLOG</span>
+                            </div>
+                            <div class="more-channel" @click="openNewPage(`/v/life/funny`)">
+                                <span>搞笑</span>
+                            </div>
+                            <div class="more-channel" @click="openNewPage(`/v/game/stand_alone`)">
+                                <span>单机游戏</span>
+                            </div>
+                            <div class="more-channel" @click="openNewPage(`/love`)">
+                                <span>公益</span>
+                            </div>
+                            <div class="more-channel" @click="openNewPage(`/mooc`)">
+                                <span>公开课</span>
+                            </div>
+                        </div>
+                    </template>
+                </VPopover>
+            </div>
             <!-- 右边 -->
             <div class="channel-items__right">
                 <div class="channel-link__right" @click="openNewPage(`/read/home`)">
                     <i class="iconfont icon-zhuanlan"></i>
-                    <span>主食</span>
+                    <span>专栏</span>
                 </div>
                 <div class="channel-link__right" @click="openNewPage(`/live`)">
-                    <i class="iconfont icon-zhuanlan"></i>
-                    <span>川菜</span>
+                    <i class="iconfont icon-zhibo"></i>
+                    <span>直播</span>
                 </div>
                 <div class="channel-link__right" @click="openNewPage(`/activity`)">
-                    <i class="iconfont icon-zhuanlan"></i>
-                    <span>粥类</span>
+                    <i class="iconfont icon-huodong"></i>
+                    <span>活动</span>
                 </div>
                 <div class="channel-link__right" @click="openNewPage(`/cheese`)">
-                    <i class="iconfont icon-zhuanlan"></i>
-                    <span>湘菜</span>
+                    <i class="iconfont icon-ketang"></i>
+                    <span>课堂</span>
                 </div>
                 <div class="channel-link__right" @click="openNewPage(`/community`)">
-                    <i class="iconfont icon-zhuanlan"></i>
-                    <span>甜点</span>
+                    <i class="iconfont icon-gonggao"></i>
+                    <span>社区中心</span>
                 </div>
                 <div class="channel-link__right" @click="openNewPage(`/song`)">
-                    <i class="iconfont icon-zhuanlan"></i>
-                    <span>其他</span>
+                    <i class="iconfont icon-xinge"></i>
+                    <span>新歌热榜</span>
                 </div>
             </div>
         </div>
@@ -53,12 +201,12 @@
 </template>
 
 <script>
-    // import VPopover from '../popover/VPopover.vue';
+    import VPopover from '../popover/VPopover.vue';
 
     export default {
         name: "HeaderChannel",
         components: {
-            // VPopover,
+            VPopover,
         },
         data() {
             return {

@@ -1,6 +1,6 @@
 <template>
     <div class="login-register">
-        <div class="canvas-wrapper">
+        <!-- <div class="canvas-wrapper" >
             <div class="video-wrapper">
                 <video
                     src="~assets/video/BadApple.mp4"
@@ -10,7 +10,7 @@
             </div>
             <canvas id="cvs" width="360" height="360"></canvas>
             <canvas id="cvs2" width="360" height="360" @click="playVideo" loop></canvas>
-        </div>
+        </div> -->
         <div class="login-register-container">
             <el-tabs stretch class="login-tabs" @tab-click="handleClick">
                 <el-tab-pane label="登录" lazy>
@@ -52,8 +52,8 @@ export default {
         }
     },
     mounted() {
-        this.videoElement = this.$refs.loginVideo;
-        this.init();
+        // this.videoElement = this.$refs.loginVideo;
+        // this.init();
         document.addEventListener('keydown', (e) => this.handleKeyboard(e));
     },
     beforeUnmount() {
@@ -125,7 +125,9 @@ export default {
             }
             this.$store.state.isLoading = true;
             // 这里为了更方便捕捉到错误后给出提示，就不使用封装的函数了
-            const result = await axios.post("/api/user/account/login", {
+            // /api/user/account/login
+            
+            const result = await axios.post("/login", {
                 username: this.usernameLogin.toString(),
                 password: this.passwordLogin.toString(),
             }).catch(() => {
@@ -168,11 +170,11 @@ export default {
                 ElMessage.error("两次输入的密码不一致");
                 return;
             }
-
-            const result = await this.$post("/user/account/register", {
+            //  /user/account/register
+            const result = await this.$post("/register", {
                 username: this.usernameRegister.toString(),
                 password: this.passwordRegister.toString(),
-                confirmedPassword: this.confirmedPassword.toString(),
+                // confirmedPassword: this.confirmedPassword.toString(),
             });
             if (!result) return;
             if (result.data.code === 200) {

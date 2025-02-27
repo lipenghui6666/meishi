@@ -238,12 +238,12 @@
                     </div>
                 </div>
             </div>
-            <div class="vip-wrap">
+            <!-- <div class="vip-wrap">
                 <div class="right-entry--outside" @click="noPage">
                     <i class="iconfont icon-huiyuan1"></i>
                     <span>大会员</span>
                 </div>
-            </div>
+            </div> -->
             <div class="v-popover-wrap">
                 <VPopover pop-style="padding-top: 17px;">
                     <template #reference>
@@ -391,7 +391,7 @@
     let outTimer;
     import VPopover from '../popover/VPopover.vue';
     import LoginRegister from '../loginRegister/LoginRegister.vue';
-    import VLevel from '@/components/UserCard/VLevel.vue';
+    // import VLevel from '@/components/UserCard/VLevel.vue';
     import { ElMessage } from 'element-plus';
     import { handleNum, handleLevel, highlightKeyword } from '@/utils/utils.js';
 
@@ -400,7 +400,7 @@
         components: {
             VPopover,
             LoginRegister,
-            VLevel,
+            // VLevel,
         },
         data() {
             return {

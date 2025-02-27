@@ -37,7 +37,7 @@
             <HeaderChannel></HeaderChannel>
         </div>
         <!-- 固钉频道栏 -->
-        <div class="header-channel-fixed" :style="isFixChannel ? '' : 'display: none;'">
+        <!-- <div class="header-channel-fixed" :style="isFixChannel ? '' : 'display: none;'">
             <div class="header-channel-fixed-container" :class="isChannelDown ? 'header-channel-fixed-down' : ''"
                 @mouseenter="isChannelDown = true;" @mouseleave="isChannelDown = false;">
                 <div class="header-channel-fixed-left">
@@ -64,7 +64,6 @@
                                 v-for="(item, index) in channels.slice(2)" :key="index">
                                 {{ item.mcName }}
                             </a>
-                            <!-- 这里的url要在VLOG标签做出来后重新修改，目前先暂定到生活日常区 -->
                             <a :href="`/v/life/daily`" target="_blank" class="header-channel-fixed-right-item">VLOG</a>
                             <a :href="`/v/life/funny`" target="_blank" class="header-channel-fixed-right-item">搞笑</a>
                             <a :href="`/v/game/stand_alone`" target="_blank"
@@ -105,7 +104,7 @@
                     <div class="iconfont icon-xiajiantou" :style="isChannelDown ? 'transform: rotate(180deg);' : ''"></div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- 主体布局 -->
         <div class="main__layout">
             <div class="recommended-container">
@@ -465,7 +464,7 @@ export default {
         },
     },
     created() {
-        this.getRandomVideos();
+        // this.getRandomVideos();
     },
     async mounted() {
         // 初始化头图的监听器
